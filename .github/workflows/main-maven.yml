@@ -3,11 +3,10 @@ name: Build and Run AiCodeReviewer By Main Maven Jar
 on:
   push:
     branches:
-      - main  # 明确指定分支，或使用 '**' 匹配所有分支
+      - *  
   pull_request:
     branches:
-      - main  # 明确指定分支，或使用 '**' 匹配所有分支
-
+      - *  
 jobs:
   build:
     runs-on: ubuntu-latest
