@@ -102,7 +102,7 @@
                     <archive>
                         <manifest>
                             <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-                            <mainClass>limoj.duke.sdk.AiCodeReviewer</mainClass>
+                            <mainClass>duke.limoj.sdk.AiCodeReviewer</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
