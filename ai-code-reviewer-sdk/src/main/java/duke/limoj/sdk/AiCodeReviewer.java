@@ -15,7 +15,7 @@ import java.io.InputStreamReader;
 public class AiCodeReviewer {
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        System.out.println("Test1111");
+        System.out.println("Starting code review...");
 
         // 1. 代码检出
         ProcessBuilder processBuilder = new ProcessBuilder("git", "diff", "HEAD~1", "HEAD");
@@ -28,7 +28,7 @@ public class AiCodeReviewer {
 
         StringBuilder diffCode = new StringBuilder();
         while ((line = reader.readLine()) != null) {
-            diffCode.append(line);
+            diffCode.append(line).append("\n");
         }
 
         int exitCode = process.waitFor();
