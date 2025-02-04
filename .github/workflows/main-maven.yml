@@ -30,7 +30,7 @@ jobs:
 
       - name: Copy ai-code-reviewer-sdk JAR
         run: |
-          mvn dependency:copy -Dartifact=duke.limoj:ai-code-reviewer-sdk:1.0 -DoutputDirectory=./libs/
+          mvn dependency:copy -Dartifact=duke.limoj:ai-code-reviewer-sdk:1.0:jar -DoutputDirectory=./libs/
 
       - name: Run code Review
         run: java -jar ./libs/ai-code-reviewer-sdk-1.0.jar
