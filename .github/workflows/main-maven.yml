@@ -34,3 +34,5 @@ jobs:
 
       - name: Run code Review
         run: java -jar ./libs/ai-code-reviewer-sdk-1.0.jar
+        env:
+          GITHUB_TOKEN: ${{ secrets.CODE_TOKEN }}
