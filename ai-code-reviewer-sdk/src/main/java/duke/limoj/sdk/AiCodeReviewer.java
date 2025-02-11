@@ -134,10 +134,10 @@ public class AiCodeReviewer {
         }
 
         git.add().addFilepattern(dateFolderName + "/" + fileName).call();
-        git.commit().setMessage("Add new file").call();
+        git.commit().setMessage("Add new file via Github Actions").call();
         git.push().setCredentialsProvider(new UsernamePasswordCredentialsProvider(token, ""));
 
-        return "https://github.com/L1MOJ/ai-code-reviewer-log/blob/main/" + dateFolderName + "/" + fileName;
+        return "https://github.com/L1MOJ/ai-code-reviewer-log/blob/master/" + dateFolderName + "/" + fileName;
     }
 
     private static String generateRandomString(int length) {
