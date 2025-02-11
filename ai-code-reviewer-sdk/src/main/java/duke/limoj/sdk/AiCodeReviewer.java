@@ -137,7 +137,7 @@ public class AiCodeReviewer {
         git.commit().setMessage("Add new file via Github Actions").call();
         git.push().setCredentialsProvider(new UsernamePasswordCredentialsProvider(token, ""));
 
-        return "https://github.com/L1MOJ/ai-code-reviewer-log/blob/master/" + dateFolderName + "/" + fileName;
+        return "https://github.com/L1MOJ/ai-code-reviewer-log/blob/main/" + dateFolderName + "/" + fileName;
     }
 
     private static String generateRandomString(int length) {
