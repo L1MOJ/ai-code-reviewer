@@ -135,7 +135,7 @@ public class AiCodeReviewer {
 
         git.add().addFilepattern(dateFolderName + "/" + fileName).call();
         git.commit().setMessage("Add new file via Github Actions").call();
-        git.push().setCredentialsProvider(new UsernamePasswordCredentialsProvider(token, ""));
+        git.push().setCredentialsProvider(new UsernamePasswordCredentialsProvider(token, "")).call();
 
         return "https://github.com/L1MOJ/ai-code-reviewer-log/blob/main/" + dateFolderName + "/" + fileName;
     }
