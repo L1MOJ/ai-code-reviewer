@@ -59,7 +59,8 @@ public class AiCodeReviewer {
         String log = codeReview(diffCode.toString());
         System.out.println("Code Review: " + log);
 
-        writeLog(token, log);
+        String logUrl = writeLog(token, log);
+        System.out.println("Log url: " + logUrl);
     }
     private static String codeReview(String diffCode) throws Exception {
 
@@ -115,7 +116,7 @@ public class AiCodeReviewer {
     private static String writeLog(String token, String log) throws Exception {
 
         Git git = Git.cloneRepository()
-                .setURI("https://github.com/L1MOJ/ai-code-reviewer-log")
+                .setURI("https://github.com/L1MOJ/ai-code-reviewer-log.git")
                 .setDirectory(new File("repo"))
                 .setCredentialsProvider(new UsernamePasswordCredentialsProvider(token, ""))
                 .call();
