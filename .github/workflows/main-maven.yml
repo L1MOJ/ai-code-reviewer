@@ -28,6 +28,18 @@ jobs:
         run: mvn clean install
 
 
+      - name: SonarQube Analysis
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mvn -B org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+            -Dsonar.projectKey=L1MOJ_ai-code-reviewer \
+            -Dsonar.organization=limoj \
+            -Dsonar.host.url=${{ secrets.SONAR_HOST }} \  
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
+            -Dsonar.qualitygate.wait=true \  
+
       - name: Copy ai-code-reviewer-sdk JAR
         run: |
           mvn dependency:copy -Dartifact=duke.limoj:ai-code-reviewer-sdk:1.0 -DoutputDirectory=./libs/
@@ -55,12 +67,12 @@ jobs:
           echo "Commit author is ${{ env.COMMIT_AUTHOR }}"
           echo "Commit message is ${{ env.COMMIT_MESSAGE }}"      
 
-      - name: Build and analyze
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=L1MOJ_ai-code-reviewer \
-          -Dsonar.organization=limoj \
-
+#      - name: Build and analyze
+#        env:
+#          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+#        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=L1MOJ_ai-code-reviewer \
+#          -Dsonar.organization=limoj \
+#
 
 #      - name: Run SonarQube Analysis
 #        run: |
