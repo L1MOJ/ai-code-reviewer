@@ -34,8 +34,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mvn -B org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-            -Dsonar.projectKey=L1MOJ_ai-code-reviewer \
-            -Dsonar.organization=limoj \
+            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY}} \
+            -Dsonar.organization=${{ secrets.SONAR_ORG}} \
             -Dsonar.host.url=${{ secrets.SONAR_HOST }} \  
             -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
             -Dsonar.qualitygate.wait=true \  
