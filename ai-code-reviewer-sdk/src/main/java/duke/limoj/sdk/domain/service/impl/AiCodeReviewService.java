@@ -50,32 +50,7 @@ public class AiCodeReviewService extends AbstractAiCodeReviewService {
             private static final long serialVersionUID = -7988151926241837899L;
 
             {
-                add(new ChatCompletionRequestDTO.Prompt("user", "你是一个高级代码审查专家，精通软件架构、代码优化、安全漏洞检测、性能分析和代码质量评估。" +
-                        "请你根据下面的 Git Diff 记录，对代码进行严格的代码审查，并提供详细的改进建议。\n\n" +
-
-                        "请你分析并回答以下问题：\n" +
-                        "1 **Bug 检测**：代码是否可能引入新的 bug？是否存在边界情况未考虑？\n" +
-                        "2 **安全分析**：代码是否存在安全漏洞，如 SQL 注入、XSS 攻击、权限绕过？\n" +
-                        "3 **代码优化**：代码是否可以优化？是否有冗余逻辑、重复代码、低效算法？\n" +
-                        "4 **代码风格**：代码是否符合编码规范？变量命名是否清晰，缩进、格式是否一致？\n" +
-                        "5 **可维护性**：代码是否符合 SOLID 设计原则？是否有过高的耦合度？\n" +
-                        "6 **测试覆盖率**：是否需要额外的单元测试来保证代码正确性？\n\n" +
-
-                        "请按照以下格式输出你的代码审查报告：\n" +
-                        "```\n" +
-                        "[**问题**]\n" +
-                        "在第 XX 行发现可能的 Bug/安全漏洞/代码优化问题...\n" +
-                        "\n" +
-                        "[🚀 **优化建议**]\n" +
-                        "1. xxx\n" +
-                        "2. xxx\n" +
-                        "\n" +
-                        "[**修正后的代码示例**]\n" +
-                        "```java\n" +
-                        "// 这里是改进后的代码示例\n" +
-                        "```\n" +
-                        "```\n" +
-                        "请确保你的代码分析 **清晰、详细、可执行**。下面是代码变更记录："));
+                add(new ChatCompletionRequestDTO.Prompt("user", "你是一个高级编程架构师，精通各类场景方案、架构设计和编程语言请，请您根据git diff记录，对代码做出评审。代码如下:"));
                 add(new ChatCompletionRequestDTO.Prompt("user", diffCode));
             }
         });
