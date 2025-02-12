@@ -55,27 +55,32 @@ jobs:
           echo "Commit author is ${{ env.COMMIT_AUTHOR }}"
           echo "Commit message is ${{ env.COMMIT_MESSAGE }}"      
 
-      - name: Run SonarQube Analysis
-        run: |
-          mvn sonar:sonar \
-          -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} \
-          -Dsonar.organization=${{ secrets.SONAR_ORG }} \
-          -Dsonar.host.url=${{ secrets.SONAR_HOST }} \
-          -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
-          -Dsonar.qualitygate.wait=true
-            
-          
-      - name: Fetch SonarQube Report
-        run: |
-          curl -u ${{ secrets.SONAR_TOKEN }}: \
-            "${{ secrets.SONAR_HOST }}/api/issues/search?componentKeys=${{ secrets.SONAR_PROJECT_KEY }}&resolved=false" \
-            -o sonar-report.json
+      - name: Build and analyze
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=L1MOJ_ai-code-reviewer
 
-      - name: Upload SonarQube Report as Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: sonar-report
-          path: sonar-report.json
+#      - name: Run SonarQube Analysis
+#        run: |
+#          mvn sonar:sonar \
+#          -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY }} \
+#          -Dsonar.organization=${{ secrets.SONAR_ORG }} \
+#          -Dsonar.host.url=${{ secrets.SONAR_HOST }} \
+#          -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
+#          -Dsonar.qualitygate.wait=true
+#
+#
+#      - name: Fetch SonarQube Report
+#        run: |
+#          curl -u ${{ secrets.SONAR_TOKEN }}: \
+#            "${{ secrets.SONAR_HOST }}/api/issues/search?componentKeys=${{ secrets.SONAR_PROJECT_KEY }}&resolved=false" \
+#            -o sonar-report.json
+#
+#      - name: Upload SonarQube Report as Artifact
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: sonar-report
+#          path: sonar-report.json
 
       - name: Run code Review
         run: java -jar ./libs/ai-code-reviewer-sdk-1.0.jar
