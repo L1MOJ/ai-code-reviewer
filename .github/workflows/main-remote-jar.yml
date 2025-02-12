@@ -3,10 +3,10 @@ name: Build and Run AiCodeReviewer By Main Maven Jar
 on:
   push:
     branches:
-      - master-close
+      - master
   pull_request:
     branches:
-      - master-close
+      - master
 
 jobs:
   build:
@@ -24,13 +24,8 @@ jobs:
           distribution: 'adopt'
           java-version: '11'
 
-      - name: Build with Maven
-        run: mvn clean install
-
-
-      - name: Copy ai-code-reviewer-sdk JAR
-        run: |
-          mvn dependency:copy -Dartifact=duke.limoj:ai-code-reviewer-sdk:1.0 -DoutputDirectory=./libs/
+      - name: Download ai-code-review-sdk JAR
+        run: wget -0 ./libs/ai-code-reviewer-sdk-1.0.jar https://github.com/L1MOJ/ai-code-reviewer-log/releases/download/v1.0/ai-code-reviewer-sdk-1.0.jar
 
       - name: Get repository name
         id: repo-name
