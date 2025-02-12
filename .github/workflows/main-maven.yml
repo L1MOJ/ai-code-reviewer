@@ -29,13 +29,13 @@ jobs:
 
       - name: SonarQube Analysis
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_TOKEN: 7b7a8f39353f12a74f96309de6b77b53a32ed1bd
         run: |
           mvn -B org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-          -Dsonar.projectKey=${{ secrets.SONAR_PROJECT_KEY}} \
-          -Dsonar.organization=${{ secrets.SONAR_ORG}} \
+          -Dsonar.projectKey=L1MOJ_ai-code-reviewer \
+          -Dsonar.organization=l1moj \
           -Dsonar.host.url=${{ secrets.SONAR_HOST }} \
-          -Dsonar.login=${{ secrets.SONAR_TOKEN }} \
+          -Dsonar.login=7b7a8f39353f12a74f96309de6b77b53a32ed1bd \
           -Dsonar.qualitygate.wait=true \
           -Dsonar.scm.provider=git \
           -Dsonar.java.coveragePlugin=jacoco \
