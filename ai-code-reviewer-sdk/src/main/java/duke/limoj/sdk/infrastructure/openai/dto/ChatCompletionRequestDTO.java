@@ -1,4 +1,4 @@
-package duke.limoj.sdk.domain.model;
+package duke.limoj.sdk.infrastructure.openai.dto;
 
 /**
  * ChatCompletionRequest
@@ -6,9 +6,11 @@ package duke.limoj.sdk.domain.model;
  * @Description:
  * @CreateTime: 2025-02-10
  */
+import duke.limoj.sdk.domain.model.Model;
+
 import java.util.List;
 
-public class ChatCompletionRequest {
+public class ChatCompletionRequestDTO {
 
     private String model = Model.GLM_4_FLASH.getCode();
     private List<Prompt> messages;

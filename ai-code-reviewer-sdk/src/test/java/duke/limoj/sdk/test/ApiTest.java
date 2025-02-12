@@ -1,7 +1,7 @@
 package duke.limoj.sdk.test;
 
 import com.alibaba.fastjson2.JSON;
-import duke.limoj.sdk.domain.model.ChatCompletionSyncResponse;
+import duke.limoj.sdk.infrastructure.openai.dto.ChatCompletionSyncResponseDTO;
 import duke.limoj.sdk.types.utils.BearerTokenUtils;
 import duke.limoj.sdk.types.utils.WechatAccessTokenUtils;
 import org.junit.Test;
@@ -11,7 +11,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
@@ -81,7 +80,7 @@ public class ApiTest {
         connection.disconnect();
 
 //        System.out.println(content);
-        ChatCompletionSyncResponse response = JSON.parseObject(content.toString(), ChatCompletionSyncResponse.class);
+        ChatCompletionSyncResponseDTO response = JSON.parseObject(content.toString(), ChatCompletionSyncResponseDTO.class);
         System.out.println(response.getChoices().get(0).getMessage().getContent());
 
     }

@@ -1,4 +1,4 @@
-package duke.limoj.sdk.domain.model;
+package duke.limoj.sdk.infrastructure.openai.dto;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ import java.util.List;
  * @Description:
  * @CreateTime: 2025-02-10
  */
-public class ChatCompletionSyncResponse {
+public class ChatCompletionSyncResponseDTO {
 
     private List<Choice> choices;
 
