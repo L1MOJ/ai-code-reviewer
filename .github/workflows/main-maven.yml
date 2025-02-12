@@ -34,8 +34,6 @@ jobs:
           mvn -B -e org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
           -Dsonar.projectKey=L1MOJ_ai-code-reviewer \
           -Dsonar.organization=l1moj \
-          -Dsonar.host.url=https://sonarcloud.io \
-          -Dsonar.token=7b7a8f39353f12a74f96309de6b77b53a32ed1bd \
           -Dsonar.qualitygate.wait=true \
 
       - name: Copy ai-code-reviewer-sdk JAR
