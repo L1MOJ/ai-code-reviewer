@@ -4,9 +4,12 @@ import com.alibaba.fastjson2.JSON;
 import duke.limoj.sdk.infrastructure.git.GitCommand;
 import duke.limoj.sdk.infrastructure.wechat.dto.TemplateMessageDTO;
 import duke.limoj.sdk.types.utils.WechatAccessTokenUtils;
+import okhttp3.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.print.attribute.standard.Media;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -45,21 +48,26 @@ public class Wechat {
         templateMessageDTO.setUrl(logUrl);
         templateMessageDTO.setData(data);
 
-        URL url = new URL(String.format("https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=%s", accessToken));
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("POST");
-        conn.setRequestProperty("Content-Type", "application/json; utf-8");
-        conn.setRequestProperty("Accept", "application/json");
-        conn.setDoOutput(true);
+        String url = String.format("https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=%s", accessToken);
+        OkHttpClient client = new OkHttpClient();
+        String jsonBody = JSON.toJSONString(templateMessageDTO);
+        RequestBody body = RequestBody.create(jsonBody, MediaType.get("application/json; charset=utf-8"));
 
-        try (OutputStream os = conn.getOutputStream()) {
-            byte[] input = JSON.toJSONString(templateMessageDTO).getBytes(StandardCharsets.UTF_8);
-            os.write(input, 0, input.length);
-        }
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .header("Content-Type", "application/json")
+                .header("Accept", "application/json")
+                .build();
 
-        try (Scanner scanner = new Scanner(conn.getInputStream(), StandardCharsets.UTF_8.name())) {
-            String response = scanner.useDelimiter("\\A").next();
-            System.out.println(response);
+        try (Response response = client.newCall(request).execute()) {
+            if (response.isSuccessful() && response.body() != null) {
+                System.out.println("Response: " + response.body().string());
+            } else {
+                System.out.println("Failed: " + response.code());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
